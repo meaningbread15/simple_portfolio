@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shuchi</title>
+  <link rel="stylesheet" href="./style.css" />
+  <!-- google fonts attachment -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+  <!-- boxicons attachment -->
+  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
+  <!-- remixicon attachment -->
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="brand">
+      <a href="#">shuchi.</a>
+    </div>
+    <div class="socials-wrapper">
+      <ul class="socials">
+        <li>
+          <a href="#" aria-label="Instagram" class="icon">
+            <i class="ri-instagram-line"></i>
+          </a>
+        </li>
+        <li>
+          <a href="#" aria-label="GitHub" class="icon">
+            <i class="ri-github-line"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <main class="hero-section">
+    <div class="content-left">
+      <h1>hi</h1>
+      <h2>call me shuchi.</h2>
+      <p class="subtitle">or my actual name if you know that</p>
+      <p class="description">
+        i like editing videos and computers<br />and philosophy sometimes
+      </p>
+    </div>
+
+    <div class="content-right">
+      <!-- Landing page right side - empty for now -->
+    </div>
+  </main>
+
+  <!-- Second Page - Cards Section -->
+  <section class="cards-page">
+    <div class="cards-container">
+      <ul class="cards-grid">
+        <li data-active="true">
+          <article>
+            <h3>Code</h3>
+            <p>
+              Explore my programming projects, algorithms, and development
+              journey through various technologies and frameworks.
+            </p>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="m18 16 4-4-4-4" />
+              <path d="m6 8-4 4 4 4" />
+              <path d="m14.5 4-5 16" />
+            </svg>
+            <a href="#"><span>View projects</span></a>
+            <img src="https://picsum.photos/720/720?random=1" alt="Code projects" />
+          </article>
+        </li>
+        <li>
+          <article>
+            <h3>Blogs</h3>
+            <p>
+              Read my thoughts on technology, development practices, and
+              insights from my learning journey.
+            </p>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+            </svg>
+            <a href="#"><span>Read posts</span></a>
+            <img src="https://picsum.photos/720/720?random=2" alt="Blog posts" />
+          </article>
+        </li>
+        <li>
+          <article>
+            <h3>Videos</h3>
+            <p>
+              Watch my video content covering tutorials, project walkthroughs,
+              and creative explorations.
+            </p>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="5,3 19,12 5,21" />
+            </svg>
+            <a href="#"><span>Watch videos</span></a>
+            <img src="https://picsum.photos/720/720?random=3" alt="Video content" />
+          </article>
+        </li>
+        <li>
+          <article>
+            <h3>Projects</h3>
+            <p>
+              Discover my latest creative works, experiments, and
+              collaborative endeavors across different domains.
+            </p>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 3h12l4 6-10 13L2 9Z" />
+              <path d="M11 3 8 9l4 13 4-13-3-6" />
+              <path d="M2 9h20" />
+            </svg>
+            <a href="#"><span>View gallery</span></a>
+            <img src="https://picsum.photos/720/720?random=4" alt="Project gallery" />
+          </article>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <script>
+    // Cards interaction
+    const cardsList = document.querySelector(".cards-grid");
+    const cardItems = cardsList.querySelectorAll("li");
+
+    const setActiveCard = (event) => {
+      const closest = event.target.closest("li");
+      if (closest) {
+        const index = [...cardItems].indexOf(closest);
+        const cols = new Array(cardsList.children.length)
+          .fill()
+          .map((_, i) => {
+            cardItems[i].dataset.active = (index === i).toString();
+            return index === i ? "10fr" : "1fr";
+          })
+          .join(" ");
+        cardsList.style.setProperty("grid-template-columns", cols);
+      }
+    };
+
+    cardsList.addEventListener("focus", setActiveCard, true);
+    cardsList.addEventListener("click", setActiveCard);
+    cardsList.addEventListener("pointermove", setActiveCard);
+
+    const resyncCards = () => {
+      const w = Math.max(
+        ...[...cardItems].map((i) => {
+          return i.offsetWidth;
+        }),
+      );
+      cardsList.style.setProperty("--article-width", w);
+    };
+
+    window.addEventListener("resize", resyncCards);
+    resyncCards();
+  </script>
+</body>
+
+</html>
