@@ -9,7 +9,7 @@
       --font-brand: "Lora", Georgia, serif;
       --font-sans:
         "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-      --bg: linear-gradient(to bottom right, #1e1e2f, #2b2b3d);
+      --bg: linear-gradient(to bottom right, #595083, #2b2b3d);
       /* dark greyish background */
       --text-light: #f5f4fa;
       /* light text */
@@ -99,14 +99,19 @@
       left: 0;
       right: 0;
       z-index: 1000;
-      backdrop-filter: blur(10px);
+      /* backdrop-filter: blur(10px); */
       border-bottom: 1px solid rgba(185, 161, 255, 0.1);
-      background: rgba(30, 30, 47, 0.8);
-      border-bottom: 1px solid rgba(184, 157, 247, 0.3);
-      backdrop-filter: blur(10px);
+      background: rgba(30, 30, 47, 0);
+      /* backdrop-filter: blur(10px); */
+    }
+
+    .brand {
+      position: relative;
+      display: inline-block;
     }
 
     .brand a {
+      position: relative;
       font-family: var(--font-brand);
       font-size: 2.5rem;
       font-weight: 400;
@@ -114,6 +119,16 @@
       text-decoration: none;
       font-style: italic;
     }
+    .brand a .underline {
+      position: absolute;
+      bottom: -4px;
+      left: 0.4em;
+      width: calc(100% - 0.6em);
+      height: 1px;
+      background-color: currentColor;
+      opacity: 0.6;
+    }
+
 
     .brand a:hover {
       color: var(--accent);
@@ -176,10 +191,58 @@
   }
 
     .content-left {
+      position: relative;
+      padding-right: 2rem;
       flex: 1;
       max-width: 50%;
-    }
+      padding: 3rem 2rem 3rem 3rem;
+}
 
+/* Simple L-shaped frame (top and left lines only) */
+.content-left::before {
+  content: '';
+  position: absolute;
+  top: -2rem;
+  left: -2rem;
+  width: calc(100% + 2rem);
+  height: calc(100% + 2rem);
+  border-top: 2.5px solid rgba(230, 230, 250, 0.4);
+  border-left: 2.5px solid rgba(230, 230, 250, 0.4);
+  z-index: -1;
+}
+
+/* Mobile responsiveness - hero section adjustment */
+@media (max-width: 768px) {
+  .hero-section {
+    padding-top: 120px; /* Remove the calc, go directly under navbar */
+    flex-direction: column;
+    gap: 2rem;
+    padding: 120px 2rem 2rem 2rem;
+  }
+  
+  .content-left {
+    max-width: 100%;
+    padding-right: 0;
+    text-align: center;
+  }
+  
+  .content-left h1 {
+    font-size: 5rem;
+  }
+  
+  .content-left h2 {
+    font-size: 2.5rem;
+  }
+  
+  .subtitle {
+    margin-left: 0;
+    text-align: center;
+  }
+  
+  .description {
+    font-size: 1.2rem;
+  }
+}
     .content-right {
       flex: 1;
       display: flex;
@@ -190,7 +253,7 @@
 
     .content-left h1 {
       font-family: var(--font-brand);
-      font-size: 8rem;
+      font-size: 9rem;
       font-weight: 400;
       color: var(--text-light);
       margin: 0;
@@ -200,10 +263,10 @@
 
     .content-left h2 {
       font-family: var(--font-brand);
-      font-size: 3rem;
+      font-size: 4rem;
       font-weight: 400;
       color: var(--text-light);
-      margin: 1rem 0 0 0;
+      margin:  0;
       font-style: normal;
     }
 
@@ -213,17 +276,75 @@
       color: rgba(230, 230, 250, 0.7);
       margin-top: 0rem;
       margin-bottom: 2rem;
-      margin-left: 4rem;
+      margin-left: 10.3rem;
       font-weight: 300;
+      font-style: italic;
     }
 
     .description {
       font-family: var(--font-sans);
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       color: var(--text-light);
       line-height: 1.6;
       font-weight: 300;
     }
+
+    .scroll-footer {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999;
+}
+
+.scroll-icon {
+  display: block;
+  padding-top: 80px;
+  position: relative;
+}
+
+.scroll-icon span {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  margin-left: -12px;
+  border-left: 1px solid #fff;
+  border-bottom: 1px solid #fff;
+  transform: rotate(-45deg);
+  animation: sdb07 2s infinite;
+  opacity: 0;
+  box-sizing: border-box;
+}
+
+.scroll-icon span:nth-of-type(1) {
+  animation-delay: 0s;
+}
+.scroll-icon span:nth-of-type(2) {
+  top: 16px;
+  animation-delay: 0.15s;
+}
+.scroll-icon span:nth-of-type(3) {
+  top: 32px;
+  animation-delay: 0.3s;
+}
+
+@keyframes sdb07 {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.scroll-down {
+  opacity: 1;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.scroll-down.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
 
     /* Cards Page - Second Section */
     .cards-page {
